@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <h2>Пример минимально необходимой структуры таблицы (только HTML) для прохождения тестов:</h1>
+  <h2>Пример минимально необходимой структуры таблицы (только HTML) для прохождения тестов:</h2>
   <div class="example">
     <table>
       <thead>
@@ -32,6 +32,9 @@
   </div>
 
   <h2>Результат выполнения вашего кода:</h2>
+  <!-- <div class="solution">
+    
+  </div> -->
 
   <script type="module">
     import UserTable from './index.js';
@@ -64,8 +67,10 @@
     ];
 
     let table = new UserTable(rows);
+    // let solution = document.querySelector('.solution');
+    // solution.append(table.elem);
     document.body.append(table.elem);
-
+    
   </script>
 </body>
 
