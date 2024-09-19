@@ -2,6 +2,7 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class ProductCard {
   elem = null;
+  product = {};
 
   constructor(product) {
     this.product = product || this.product;
@@ -32,7 +33,6 @@ export default class ProductCard {
             </button>
           </div>
         </div>
-      </div>
       `}
 
   render(){
