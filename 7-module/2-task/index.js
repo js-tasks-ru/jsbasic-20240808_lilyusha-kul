@@ -3,24 +3,24 @@ import createElement from '../../assets/lib/create-element.js';
 export default class Modal {
  elem = null;
 
-  modalTitle = null;
-  modalBodyAdd = null;
-  closeButton = null;
+    modalTitle = null;
+    modalBodyAdd = null;
+    closeButton = null;
 
-constructor() {
-  this.elem = createElement(this.template);
+  constructor() {
+    this.elem = createElement(this.template);
 
-  this.modalTitle = this.elem.querySelector('.modal__title');
-  this.modalBodyAdd = this.elem.querySelector('.modal__body');
-  this.closeButton = this.elem.querySelector('.modal__close');
+    this.modalTitle = this.elem.querySelector('.modal__title');
+    this.modalBodyAdd = this.elem.querySelector('.modal__body');
+    this.closeButton = this.elem.querySelector('.modal__close');
 
-  this.closeButton.addEventListener("click", () => this.close());
-  document.addEventListener('keydown', this.handler);      
+    this.closeButton.addEventListener("click", () => this.close());
+    document.addEventListener('keydown', this.handler);      
   }
 
   handler = (event) => {
     if (event.code === 'Escape') {
-    this.close();
+      this.close();
     }
     // document.removeEventListener('keydown', this.handler);
   }
@@ -71,10 +71,10 @@ constructor() {
     this.modalBodyAdd.append(modalBody);
   }
 
-   close() {
-  this.elem.remove();
-  document.body.classList.remove('is-modal-open');
-  document.removeEventListener('keydown', this.handler);  
+  close() {
+    this.elem.remove();
+    document.body.classList.remove('is-modal-open');
+    document.removeEventListener('keydown', this.handler);  
   }
 
 }

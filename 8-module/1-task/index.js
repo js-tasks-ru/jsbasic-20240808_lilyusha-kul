@@ -1,6 +1,7 @@
 import createElement from '../../assets/lib/create-element.js';
 
 export default class CartIcon {
+  initialTopCoord = 0;
   constructor() {
     this.render();
 
@@ -20,7 +21,7 @@ export default class CartIcon {
           <span class="cart-icon__count">${cart.getTotalCount()}</span>
           <span class="cart-icon__price">€${cart.getTotalPrice().toFixed(2)}</span>
         </div>`;
-
+      this.initialTopCoord = this.elem.getBoundingClientRect().top + window.scrollY;
       this.updatePosition();
 
       this.elem.classList.add('shake');
@@ -39,6 +40,40 @@ export default class CartIcon {
   }
 
   updatePosition() {
-    // ваш код ...
+    if (this.elem.offsetWidth > 0 || this.elem.offsetHeight > 0) {
+      
+      if (window.scrollY > this.initialTopCoord) {
+      // плавающая корзина
+        let leftIndent = Math.min(
+          document.querySelector('.container').getBoundingClientRect().right + 20,
+          document.documentElement.clientWidth - this.elem.offsetWidth - 10
+        ) + 'px';
+
+        Object.assign(this.elem.style, {
+          position: 'fixed',
+          top: '50px',
+          zIndex: 1e3,
+          right: '10px',
+          left: leftIndent
+        });
+      } else {
+        // корзина сверху
+        Object.assign(this.elem.style, {
+          position: '',
+          top: '',
+          left: '',
+          zIndex: ''
+        });
+      }
+
+      if (document.documentElement.clientWidth <= 767) {
+        Object.assign(this.elem.style, {
+          position: '',
+          top: '',
+          left: '',
+          zIndex: ''
+        });
+      }
+    }
   }
 }
