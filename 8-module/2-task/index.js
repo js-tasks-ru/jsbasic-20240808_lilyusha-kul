@@ -36,7 +36,7 @@ export default class ProductGrid {
       this.filteredProductCards = this.filteredProductCards.filter(item => item.product.vegeterian == true); 
     } 
 
-    if(this.filters.maxSpiciness) {
+    if(this.filters.maxSpiciness !== undefined && this.filters.maxSpiciness !== null) {
       this.filteredProductCards = this.filteredProductCards.filter(item => +(item.product.spiciness) <= +(this.filters.maxSpiciness));
     } 
 
@@ -64,6 +64,23 @@ export default class ProductGrid {
     for (let productCard of this.filteredProductCards) {
       cardContainer.append(productCard.render());
     }
+    this.createListeners();
   }    
+
+  // FIXME: Пофиксить в след релизе
+  createListeners() {
+    for (let productCard of this.filteredProductCards) {
+      let cardButton = productCard.elem.querySelector('.card__button');      
+
+      cardButton.addEventListener('click', () => {        
+        this.elem.dispatchEvent (new CustomEvent("product-add", {
+          detail: productCard.product.id, 
+          bubbles: true 
+        }));
+      })
+    }
+    
+    
+  }
 
 }

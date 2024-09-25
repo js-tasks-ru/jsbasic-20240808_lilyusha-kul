@@ -159,7 +159,6 @@ export default class Cart {
       })
     }
     
-
     let cartForm = modalBody.querySelector('.cart-form');
     cartForm.addEventListener('submit', (event) => this.onSubmit(event));
   }
@@ -179,7 +178,6 @@ export default class Cart {
     for (let buttonMinus of buttonsMinus) {
       buttonMinus.addEventListener('click', (event) => {
         this.updateProductCount(event.target.closest('.cart-product').dataset.productId, -1);
-
       });
     }
 
@@ -191,12 +189,11 @@ export default class Cart {
       })
     }
     
-
     let cartForm = modalBody.querySelector('.cart-form');
     cartForm.addEventListener('submit', (event) => this.onSubmit(event));
   }
 
-  onProductUpdate(cartItem) {
+  onProductUpdate() {
    
     this.cartIcon.update(this);
   
@@ -240,6 +237,8 @@ export default class Cart {
           </div>
           `);
         this.modal.setBody(modalBody);
+        // this.onProductUpdate();
+        this.cartIcon.update(this);
       })
   };
 

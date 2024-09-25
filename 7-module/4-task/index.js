@@ -15,9 +15,10 @@ export default class StepSlider {
   progress = null;
 
   constructor({ steps, value = 0 }) {
-    this.elem = this.render();
+    
     this.config = { steps, value };
-
+    this.elem = this.render();
+    
     this.sliderSteps = this.elem.querySelector('.slider__steps');
     this.sliderValue = this.elem.querySelector('.slider__value');
     this.thumb = this.elem.querySelector('.slider__thumb');
@@ -107,10 +108,14 @@ export default class StepSlider {
     for (let i = 0; i < this.config.steps; i ++) {
       let span = document.createElement('span');
       this.sliderSteps.append(span);
-      if (i == 0) {
+      if (i == this.config.value) {
         span.classList.add('slider__step-active');
       }
     }
+  }
+
+  thumbCalculate() {
+    return 100 / (this.config.steps - 1) * this.config.value;
   }
 
   template() {
@@ -119,12 +124,12 @@ export default class StepSlider {
     <div class="slider">
 
       <!--Ползунок слайдера с активным значением-->
-      <div class="slider__thumb" style="left: 50%;">
-        <span class="slider__value">2</span>
+      <div class="slider__thumb" style="left: ${ this.thumbCalculate() }%;">
+        <span class="slider__value">${ this.config.value }</span>
       </div>
 
       <!--Заполненная часть слайдера-->
-      <div class="slider__progress" style="width: 50%;"></div>
+      <div class="slider__progress" style="width: ${ this.thumbCalculate() }%;"></div>
 
       <!--Шаги слайдера-->
       <div class="slider__steps">
