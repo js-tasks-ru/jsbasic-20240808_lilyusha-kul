@@ -21,14 +21,11 @@ export default class Main {
   constructor() {
     this.carousel = new Carousel(slides);
     this.ribbonMenu = new RibbonMenu(categories);
-    // this.cartIcon = new CartIcon();
     this.cart = new Cart(new CartIcon());
-    // this.productsGrid = new ProductsGrid(products);
     this.stepSlider = new StepSlider({
       steps: 5,
       value: 3,
-    });
-    
+    }); 
   }
 
   async render() {
@@ -55,21 +52,12 @@ export default class Main {
     productGridHolder.innerHTML = '';
     productGridHolder.append(productsGrid.elem);
 
-    // let cart = new Cart(this.cartIcon);
-
     productsGrid.updateFilter({
       noNuts: document.getElementById('nuts-checkbox').checked,
       vegeterianOnly: document.getElementById('vegeterian-checkbox').checked,
       maxSpiciness: this.stepSlider.value,
       category: ''
     });
-
-    // productsGrid.updateFilter({
-    //   noNuts: false,
-    //   vegeterianOnly: false,
-    //   maxSpiciness: '0',
-    //   category: 'All'
-    // });
 
     document.body.addEventListener('product-add', (event) => {      
       for(let product of products) {
@@ -85,12 +73,6 @@ export default class Main {
         maxSpiciness: event.detail,
       });
     })
-
-  //   document.body.addEventListener('slider-change', function(event) {
-  //     if (event.target.checked) {
-  //       productsGrid.updateFilter({ maxSpiciness: event.detail });
-  //   }})
-
 
     document.body.addEventListener('ribbon-select', function(event) {
       productsGrid.updateFilter({
@@ -115,8 +97,3 @@ export default class Main {
   })
   }
 }
-// карточки товара не вносятся в корзину
-// на карусели карточки вносястся, но со всей картинки, а не с кнопки плюс
-// слайдер на значении ноль неправильно фильтрует
-// корзина не исчезает после отправки формы
-// карточки не фильтруются, как в задании изначально
