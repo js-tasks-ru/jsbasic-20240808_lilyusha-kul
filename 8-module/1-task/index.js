@@ -4,15 +4,17 @@ export default class CartIcon {
   initialTopCoord = 0;
   constructor() {
     this.render();
+    this.initialTopCoord = this.elem.getBoundingClientRect().top + window.scrollY;
 
     this.addEventListeners();
-  }
+  } 
 
   render() {
     this.elem = createElement('<div class="cart-icon"></div>');
   }
 
   update(cart) {
+    console.log('call update');
     if (!cart.isEmpty()) {
       this.elem.classList.add('cart-icon_visible');
 
@@ -21,7 +23,6 @@ export default class CartIcon {
           <span class="cart-icon__count">${cart.getTotalCount()}</span>
           <span class="cart-icon__price">€${cart.getTotalPrice().toFixed(2)}</span>
         </div>`;
-      this.initialTopCoord = this.elem.getBoundingClientRect().top + window.scrollY;
       this.updatePosition();
 
       this.elem.classList.add('shake');
@@ -41,8 +42,12 @@ export default class CartIcon {
 
   updatePosition() {
     if (this.elem.offsetWidth > 0 || this.elem.offsetHeight > 0) {
-      
+      console.log('scrill > top');
+      console.log(window.scrollY);
+      console.log(this.initialTopCoord);
+
       if (window.scrollY > this.initialTopCoord) {
+        
       // плавающая корзина
         let leftIndent = Math.min(
           document.querySelector('.container').getBoundingClientRect().right + 20,
